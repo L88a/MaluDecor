@@ -1,0 +1,689 @@
+/* --- MALU DECOR - REDESIGN ELEGANTE v2 --- */
+
+/* 1. VARIÁVEIS E ESTILOS GLOBAIS */
+:root {
+    --rosa-principal: #D988B9;   /* Rosa antigo, sofisticado */
+    --rosa-escuro: #C06B9E;      /* Para hovers e contraste em botões */
+    --texto-escuro: #4A274F;     /* Roxo escuro, elegante */
+    --fundo-claro: #FCF8F3;      /* Branco quente e suave */
+    --fundo-secao: #F8ECF3;      /* Tom claro para alternar seções */
+    --sombra-suave: rgba(74, 39, 79, 0.12);
+
+    /* Cor reservada para espaços de imagem ainda não enviados pelo cliente */
+    --placeholder-roxo-1: #9B6FB8;
+    --placeholder-roxo-2: #6E4A8C;
+
+    --fonte-titulos: 'Lora', serif;
+    --fonte-corpo: 'Poppins', sans-serif;
+
+    --raio: 14px;
+    --transicao: 0.3s ease;
+    --altura-cabecalho: 92px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: var(--altura-cabecalho);
+}
+
+body {
+    background-color: var(--fundo-claro);
+    font-family: var(--fonte-corpo);
+    color: var(--texto-escuro);
+    line-height: 1.6;
+}
+
+/* Salvaguarda: nenhuma imagem ultrapassa a largura do seu contêiner no celular */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Link de acessibilidade para pular o menu */
+.pular-link {
+    position: absolute;
+    left: -999px;
+    top: 0;
+    background: var(--texto-escuro);
+    color: #fff;
+    padding: 12px 20px;
+    z-index: 2000;
+    border-radius: 0 0 8px 0;
+}
+.pular-link:focus {
+    left: 0;
+}
+
+/* Foco visível para navegação por teclado */
+a:focus-visible,
+button:focus-visible {
+    outline: 3px solid var(--texto-escuro);
+    outline-offset: 3px;
+}
+
+.section-title {
+    font-family: var(--fonte-titulos);
+    font-size: clamp(1.7rem, 4.5vw + 1rem, 2.6rem);
+    text-align: center;
+    margin: 0 0 10px;
+    font-weight: 500;
+    color: var(--rosa-principal);
+}
+
+.section-subtitulo {
+    text-align: center;
+    max-width: 520px;
+    margin: 0 auto 40px;
+    color: var(--texto-escuro);
+    opacity: 0.75;
+    font-size: clamp(0.9rem, 1.5vw + 0.6rem, 0.98rem);
+    padding: 0 10px;
+}
+
+.secao { padding: 60px 0; }
+.secao-clara { background-color: var(--fundo-secao); }
+
+.btn {
+    display: inline-block;
+    font-family: var(--fonte-corpo);
+    font-weight: 500;
+    font-size: 0.95rem;
+    text-decoration: none;
+    padding: 14px 30px;
+    border-radius: 50px;
+    transition: transform var(--transicao), box-shadow var(--transicao), background-color var(--transicao);
+    border: 2px solid transparent;
+}
+.btn-primario {
+    background-color: var(--rosa-principal);
+    color: #fff;
+}
+.btn-primario:hover {
+    background-color: var(--rosa-escuro);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px var(--sombra-suave);
+}
+.btn-secundario {
+    background-color: transparent;
+    color: #fff;
+    border-color: #fff;
+}
+.btn-secundario:hover {
+    background-color: #fff;
+    color: var(--texto-escuro);
+    transform: translateY(-2px);
+}
+
+/* 2. CABEÇALHO E NAVEGAÇÃO */
+header {
+    position: sticky;
+    top: 0;
+    z-index: 500;
+    background-color: rgba(252, 248, 243, 0.95);
+    backdrop-filter: blur(6px);
+    box-shadow: 0 2px 12px var(--sombra-suave);
+}
+
+.cabecalho-interno {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 10px 20px;
+    position: relative;
+}
+
+.logo-link { display: flex; align-items: center; flex-shrink: 0; }
+
+.logo {
+    width: 190px;
+    height: auto;
+}
+
+.menu {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4px;
+    flex: 1;
+}
+
+.menu a {
+    font-family: var(--fonte-corpo);
+    font-size: 0.92rem;
+    font-weight: 500;
+    text-decoration: none;
+    color: var(--texto-escuro);
+    padding: 12px 16px;
+    border-radius: 8px;
+    transition: color var(--transicao), background-color var(--transicao);
+}
+
+.menu a:hover {
+    color: var(--rosa-principal);
+    background-color: rgba(217, 136, 185, 0.08);
+}
+
+.btn-whatsapp-header {
+    background-color: var(--rosa-principal);
+    color: #fff;
+    font-size: 0.85rem;
+    padding: 11px 22px;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+.btn-whatsapp-header:hover {
+    background-color: var(--rosa-escuro);
+}
+
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 44px;
+    height: 44px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.menu-backdrop {
+    display: none;
+    position: fixed;
+    inset: var(--altura-cabecalho) 0 0 0;
+    background-color: rgba(74, 39, 79, 0.35);
+    z-index: 490;
+    opacity: 0;
+    transition: opacity var(--transicao);
+    border: none;
+    padding: 0;
+}
+.menu-backdrop.visivel {
+    display: block;
+    opacity: 1;
+}
+.menu-toggle span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: var(--texto-escuro);
+    border-radius: 2px;
+    transition: transform var(--transicao), opacity var(--transicao);
+}
+.menu-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.menu-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.menu-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* 3. HERO E CARROSSEL PRINCIPAL */
+.hero {
+    position: relative;
+}
+
+.slider {
+    position: relative;
+    width: 100%;
+    height: 520px;
+    overflow: hidden;
+}
+
+.slides {
+    display: flex;
+    height: 100%;
+    transition: transform 0.6s ease;
+}
+
+.slide {
+    min-width: 100%;
+    height: 100%;
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.6);
+}
+
+.hero-texto {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 20px;
+    color: #fff;
+}
+
+.hero-texto h1 {
+    font-family: var(--fonte-titulos);
+    font-size: clamp(1.5rem, 5vw + 0.8rem, 2.6rem);
+    font-weight: 500;
+    max-width: 700px;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.35);
+}
+
+.hero-texto p {
+    max-width: 520px;
+    margin: 16px 0 26px;
+    font-size: clamp(0.9rem, 1.8vw + 0.6rem, 1.05rem);
+    text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+.hero-botoes {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.slider-seta {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(255,255,255,0.25);
+    color: #fff;
+    border: none;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color var(--transicao);
+    z-index: 5;
+}
+.slider-seta:hover { background-color: rgba(255,255,255,0.45); }
+.seta-anterior { left: 20px; }
+.seta-proxima { right: 20px; }
+
+.slider-dots {
+    position: absolute;
+    bottom: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 5;
+}
+.slider-dots button {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    background: transparent;
+    cursor: pointer;
+    padding: 0;
+}
+.slider-dots button[aria-selected="true"] {
+    background-color: #fff;
+}
+
+/* 4. GALERIA DE FESTAS (carrossel manual) */
+.carousel-2x2 {
+    position: relative;
+}
+
+.carousel-track {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    padding-bottom: 4px;
+}
+.carousel-track::-webkit-scrollbar { display: none; }
+
+.carousel-item {
+    scroll-snap-align: start;
+    flex: 0 0 calc(50% - 10px);
+    height: 280px;
+    border: none;
+    padding: 0;
+    border-radius: var(--raio);
+    overflow: hidden;
+    box-shadow: 0 5px 20px var(--sombra-suave);
+    cursor: pointer;
+    transition: transform var(--transicao), box-shadow var(--transicao);
+}
+.carousel-item:hover {
+    transform: scale(1.03);
+    box-shadow: 0 10px 25px rgba(74, 39, 79, 0.22);
+}
+.carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.carousel-controles {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    margin-top: 20px;
+}
+.carousel-botao {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 1px solid var(--sombra-suave);
+    background-color: #fff;
+    color: var(--texto-escuro);
+    cursor: pointer;
+    transition: background-color var(--transicao), color var(--transicao);
+}
+.carousel-botao:hover {
+    background-color: var(--rosa-principal);
+    color: #fff;
+}
+
+/* 5. COMO FUNCIONA */
+.passos {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    counter-reset: passo;
+}
+.passo {
+    background-color: #fff;
+    border-radius: var(--raio);
+    padding: 30px 26px;
+    box-shadow: 0 5px 20px var(--sombra-suave);
+}
+.passo-numero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--rosa-principal);
+    color: #fff;
+    font-family: var(--fonte-titulos);
+    font-size: 1.1rem;
+    margin-bottom: 16px;
+}
+.passo h3 {
+    font-family: var(--fonte-titulos);
+    font-weight: 500;
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+}
+.passo p {
+    font-size: 0.95rem;
+    opacity: 0.85;
+}
+
+/* 6. ALUGUEL */
+.quatro-imagens {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+.item-aluguel {
+    position: relative;
+    border-radius: var(--raio);
+    overflow: hidden;
+    box-shadow: 0 5px 20px var(--sombra-suave);
+    transition: transform var(--transicao), box-shadow var(--transicao);
+}
+.item-aluguel:hover {
+    transform: scale(1.03);
+    box-shadow: 0 10px 25px rgba(74, 39, 79, 0.22);
+}
+.item-aluguel img {
+    width: 100%;
+    height: 230px;
+    object-fit: cover;
+    display: block;
+}
+.btn-aluguel {
+    display: block;
+    text-align: center;
+    background-color: rgba(74, 39, 79, 0.88);
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    padding: 10px 0;
+    transition: background-color var(--transicao);
+}
+.btn-aluguel:hover {
+    background-color: var(--rosa-principal);
+}
+
+/* 7. PLACEHOLDER ROXO */
+.placeholder-roxo,
+.mapa-placeholder {
+    background: linear-gradient(135deg, var(--placeholder-roxo-1), var(--placeholder-roxo-2));
+    color: #fff;
+}
+
+.depoimentos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 26px;
+    max-width: 780px;
+    margin: 0 auto;
+}
+.depoimento-card {
+    border-radius: var(--raio);
+    padding: 34px 26px;
+    text-align: center;
+    box-shadow: 0 5px 20px var(--sombra-suave);
+}
+
+.depoimento-texto {
+    font-size: 0.92rem;
+    font-style: italic;
+    opacity: 0.95;
+    margin-bottom: 14px;
+}
+.depoimento-nome {
+    font-family: var(--fonte-titulos);
+    font-size: 1rem;
+}
+
+/* 8. CHAMADA FINAL */
+.cta-final {
+    background-color: var(--texto-escuro);
+    color: #fff;
+    padding: 70px 0;
+}
+.cta-final-conteudo {
+    text-align: center;
+}
+.cta-final h2 {
+    font-family: var(--fonte-titulos);
+    font-size: 2.1rem;
+    font-weight: 500;
+    margin-bottom: 12px;
+}
+.cta-final p {
+    opacity: 0.85;
+    margin-bottom: 26px;
+}
+.cta-final .btn-primario {
+    background-color: var(--rosa-principal);
+}
+
+/* 9. ÍCONES FLUTUANTES E RODAPÉ */
+.icone-fixo {
+    position: fixed;
+    bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+    z-index: 1000;
+}
+.icone-fixo img { width: 50px; height: 50px; transition: transform var(--transicao); }
+.icone-fixo:hover img { transform: scale(1.1); }
+.icone-instagram { left: calc(20px + env(safe-area-inset-left, 0px)); }
+.icone-whatsapp { right: calc(20px + env(safe-area-inset-right, 0px)); }
+
+.rodape {
+    background-color: #fff;
+    padding: 50px 0 0;
+    border-top: 1px solid var(--sombra-suave);
+    color: var(--texto-escuro);
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.rodape .painel h4 {
+    font-family: var(--fonte-titulos);
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+}
+
+.rodape ul { list-style: none; }
+.rodape ul li { margin-bottom: 10px; }
+.rodape a { text-decoration: none; color: var(--texto-escuro); }
+.rodape a:hover { color: var(--rosa-principal); }
+.rodape p { margin: 6px 0; }
+
+.footer-bottom {
+    text-align: center;
+    padding: 20px 0;
+    border-top: 1px solid var(--sombra-suave);
+    font-size: 0.85rem;
+}
+
+/* 10. LIGHTBOX */
+.lightbox {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(74, 39, 79, 0.92);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    z-index: 2000;
+    padding: 30px;
+}
+.lightbox[hidden] { display: none; }
+.lightbox img {
+    max-width: min(90vw, 800px);
+    max-height: 75vh;
+    border-radius: 10px;
+    object-fit: contain;
+}
+.lightbox p {
+    color: #fff;
+    font-size: 0.95rem;
+}
+.lightbox-fechar {
+    position: absolute;
+    top: 20px;
+    right: 24px;
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 2rem;
+    cursor: pointer;
+    line-height: 1;
+}
+
+/* Respeita usuários que preferem menos animação */
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .slides { transition: none; }
+    * { animation: none !important; }
+}
+
+/* 11. DESIGN RESPONSIVO (PARA CELULARES E TABLETS) */
+@media (max-width: 900px) {
+    .passos { grid-template-columns: 1fr; }
+    .depoimentos-grid { grid-template-columns: 1fr; }
+    .quatro-imagens { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+    :root { --altura-cabecalho: 70px; }
+
+    .logo { width: 130px; }
+
+    .menu-toggle { display: flex; }
+
+    .menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        background-color: var(--fundo-claro);
+        box-shadow: 0 10px 20px var(--sombra-suave);
+        padding: 10px 0;
+        gap: 0;
+    }
+    .menu.aberto { display: flex; }
+    .menu a { padding: 14px 24px; width: 100%; text-align: center; }
+
+    .btn-whatsapp-header { display: none; }
+    .personagem-sentado { display: none; }
+
+    .section-title { font-size: 2rem; }
+
+    .slider { height: 260px; }
+    .slide img { filter: none; }
+
+    .hero-texto {
+        position: static;
+        inset: auto;
+        background-color: var(--texto-escuro);
+        padding: 34px 24px 40px;
+        color: #fff;
+    }
+    .hero-texto h1,
+    .hero-texto p {
+        text-shadow: none;
+    }
+
+    .hero-texto h1 { font-size: 1.5rem; }
+    .hero-texto p { font-size: 0.95rem; }
+
+    .carousel-item { flex: 0 0 85%; height: 220px; }
+
+    .quatro-imagens { grid-template-columns: 1fr; }
+
+    .footer-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .icone-fixo img { width: 42px; height: 42px; }
+}
+
+/* Telas bem pequenas (iPhone SE e similares) */
+@media (max-width: 400px) {
+    .logo { width: 110px; }
+    .hero-texto p { margin-bottom: 20px; }
+    .hero-botoes { gap: 10px; }
+    .btn { padding: 12px 22px; font-size: 0.88rem; }
+    .secao { padding: 44px 0; }
+    .carousel-item { flex: 0 0 90%; height: 190px; }
+    .passo { padding: 24px 20px; }
+    .depoimento-card { padding: 26px 18px; }
+}
