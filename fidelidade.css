@@ -1,0 +1,209 @@
+/* --- PÁGINA DE CONSULTA DE FIDELIDADE --- */
+
+:root {
+    --lilas-cartao: #D9A6E8;
+}
+
+
+.link-voltar-site {
+    margin-left: auto;
+}
+
+.secao-fidelidade {
+    padding: 70px 0 90px;
+    min-height: calc(100vh - var(--altura-cabecalho));
+}
+
+.container-fidelidade {
+    max-width: 560px;
+    text-align: center;
+}
+
+.form-fidelidade {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+}
+
+.campo-fidelidade {
+    width: 100%;
+    text-align: left;
+}
+
+.campo-fidelidade label {
+    display: block;
+    font-family: var(--fonte-corpo);
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: var(--texto-escuro);
+    margin-bottom: 8px;
+}
+
+.campo-fidelidade input {
+    width: 100%;
+    font-family: var(--fonte-corpo);
+    font-size: 1.05rem;
+    padding: 14px 18px;
+    border-radius: var(--raio);
+    border: 2px solid var(--sombra-suave);
+    background-color: #fff;
+    color: var(--texto-escuro);
+    transition: border-color var(--transicao);
+}
+
+.campo-fidelidade input:focus {
+    outline: none;
+    border-color: var(--rosa-principal);
+}
+
+.campo-fidelidade input.campo-invalido {
+    border-color: #c0392b;
+}
+
+.cpf-erro {
+    margin-top: 8px;
+    color: #c0392b;
+    font-size: 0.85rem;
+}
+
+.btn-consultar-fidelidade {
+    width: 100%;
+    max-width: 260px;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+/* Quadrado preto: placeholder para o conteúdo futuro da fidelidade */
+/* --- CARTÃO DE FIDELIDADE (substitui o quadrado preto) --- */
+
+.resultado-fidelidade {
+    margin: 40px auto 0;
+    width: 100%;
+    max-width: 460px;
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.resultado-fidelidade.visivel {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.resultado-mensagem-caixa {
+    background-color: var(--fundo-secao);
+    border-radius: var(--raio);
+    padding: 30px 24px;
+    text-align: center;
+    color: var(--texto-escuro);
+    font-family: var(--fonte-corpo);
+    box-shadow: 0 8px 24px var(--sombra-suave);
+}
+
+.cartao-fidelidade {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 22px;
+}
+
+.cartao-cabecalho {
+    width: 100%;
+    background-color: var(--lilas-cartao);
+    border-radius: 26px;
+    padding: 20px 24px;
+    text-align: center;
+    box-shadow: 0 8px 24px var(--sombra-suave);
+}
+
+.cartao-nome {
+    font-family: var(--fonte-titulos);
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--texto-escuro);
+    margin: 0;
+}
+
+.cartao-designacao {
+    font-family: var(--fonte-corpo);
+    font-size: 0.95rem;
+    color: var(--texto-escuro);
+    margin: 4px 0 0;
+}
+
+.cartao-festas-label {
+    background-color: var(--lilas-cartao);
+    border-radius: 999px;
+    padding: 10px 28px;
+    font-family: var(--fonte-corpo);
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--texto-escuro);
+}
+
+.cartao-bolinhas {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    max-width: 300px;
+}
+
+.bolinha {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--fonte-corpo);
+    font-size: 1.2rem;
+    color: var(--texto-escuro);
+    transition: background-color var(--transicao);
+}
+
+.bolinha-ativa {
+    background-color: var(--lilas-cartao);
+}
+
+.bolinha-inativa {
+    background-color: #E1E1E1;
+    color: #9A9A9A;
+}
+
+.cartao-bonificacao {
+    width: 100%;
+    background-color: var(--lilas-cartao);
+    clip-path: polygon(3% 50%, 0% 0%, 100% 0%, 97% 50%, 100% 100%, 0% 100%);
+    padding: 16px 40px;
+    text-align: center;
+    font-family: var(--fonte-corpo);
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--texto-escuro);
+}
+
+@media (max-width: 480px) {
+    .bolinha {
+        width: 58px;
+        height: 58px;
+        font-size: 1rem;
+    }
+    .cartao-bolinhas {
+        max-width: 240px;
+        gap: 12px;
+    }
+}
+
+.resultado-fidelidade.visivel {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@media (max-width: 480px) {
+    .resultado-fidelidade {
+        max-width: 100%;
+    }
+}

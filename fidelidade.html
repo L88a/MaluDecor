@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Consultar Fidelidade - Malu Decor</title>
+    <meta name="description" content="Consulte seu status de fidelidade com a Malu Decor usando seu CPF.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="robots" content="noindex">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="estilo.css">
+    <link rel="stylesheet" href="fidelidade.css">
+    <link rel="shortcut icon" href="fotos/Logo-Malu.jpeg">
+</head>
+<body>
+
+    <a href="#conteudo-fidelidade" class="pular-link">Pular para o conteúdo</a>
+
+    <header id="cabecalho">
+        <div class="container cabecalho-interno">
+            <a href="MaluDecor.html" class="logo-link">
+                <img src="fotos/Logo.png" alt="Malu Decor" class="logo">
+            </a>
+
+            <a href="MaluDecor.html" class="btn btn-fidelidade-header link-voltar-site">
+                &#8592; Voltar ao site
+            </a>
+        </div>
+    </header>
+
+    <main id="conteudo-fidelidade">
+        <section class="secao secao-fidelidade">
+            <div class="container container-fidelidade">
+                <h1 class="section-title">Consultar Fidelidade</h1>
+                <p class="section-subtitulo">Digite seu CPF para ver o seu status de fidelidade com a Malu Decor.</p>
+
+                <form id="form-fidelidade" class="form-fidelidade" novalidate>
+                    <div class="campo-fidelidade">
+                        <label for="cpf-fidelidade">CPF</label>
+                        <input
+                            type="text"
+                            id="cpf-fidelidade"
+                            name="cpf"
+                            inputmode="numeric"
+                            autocomplete="off"
+                            placeholder="000.000.000-00"
+                            maxlength="14"
+                            required
+                            aria-describedby="cpf-erro">
+                        <p id="cpf-erro" class="cpf-erro" role="alert" hidden>Digite um CPF válido com 11 números.</p>
+                    </div>
+
+                    <button type="submit" class="btn btn-primario btn-consultar-fidelidade">Consultar</button>
+                </form>
+
+                <!-- Área de resultado: por enquanto um quadrado preto placeholder -->
+                <div class="resultado-fidelidade" id="resultado-fidelidade" hidden aria-live="polite">
+                    <!-- Conteúdo real da fidelidade será definido futuramente -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="fidelidade.js"></script>
+</body>
+</html>
